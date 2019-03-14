@@ -8,6 +8,8 @@ use App\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
+use JWTAuth;
+use Tymon\JWTAuth\Exceptions\JWTException;
 
 class LoginController extends Controller
 {
@@ -41,5 +43,19 @@ class LoginController extends Controller
         $this->middleware('guest')->except('logout');
     }
 
-  
+    public function login(Request $request)
+    {
+        $userData=$request->only('email','password');
+        try {
+          if(! $token = JWTAuth::attempt($userData)){
+              return response()->json(['message'=>'Invalid credentials'],400);
+          }
+        } catch (JWTException $e) {
+            return reponse()->json(['message'=>'Couldnt create token '], 400);
+          
+        }
+
+        return response()->json(compact('token'));
+     
+    }
 }
