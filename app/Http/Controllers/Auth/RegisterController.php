@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 use Illuminate\Http\Request;
-use App\User;
+use App\Models\User;
 use JWTAuth;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use App\Http\Controllers\Controller;

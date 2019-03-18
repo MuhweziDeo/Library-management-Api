@@ -285,6 +285,7 @@ return [
         | Specify the provider that is used to authenticate users.
         |
         */
+        // 'user' => 'App\Models\User',
 
         'auth' => Tymon\JWTAuth\Providers\Auth\Illuminate::class,
 
