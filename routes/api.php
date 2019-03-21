@@ -14,12 +14,28 @@ use Illuminate\Http\Request;
 */
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
+    
     return $request->user();
 });
-Route::post('book','BookController@store');
-Route::get('book/{id}','BookController@show');
-Route::delete('book/{id}','BookController@destroy');
-Route::get('book','BookController@index');
-Route::put('book/{id}','BookController@update');
+
+
+
+
+
 Route::post('register', 'Auth\RegisterController@register');
 Route::post('login', 'Auth\LoginController@login');
+
+Route::middleware('TokenAuthentication')->group(function () {
+    Route::post('book','BookController@store');
+  });
+
+Route::group(['middleware' => ['isAdmin']], function () {
+    //
+    Route::post('book','BookController@store');
+    Route::delete('book/{id}','BookController@destroy');
+    Route::put('book/{id}','BookController@update');
+});
+
+Route::get('book/{id}','BookController@show'); 
+
+Route::get('book','BookController@index');
