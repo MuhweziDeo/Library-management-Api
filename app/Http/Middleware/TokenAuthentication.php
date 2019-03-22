@@ -18,7 +18,8 @@ class TokenAuthentication
     {
         if($request->header('Authorization')){
             try {
-                // $user = JWTAuth::parseToken($request->header('Authorization'))->authenticate();
+                $user = JWTAuth::parseToken($request->header('Authorization'))->authenticate();
+                $request->user=$user;
                 return $next($request);
                
             } catch (Exception $e) {

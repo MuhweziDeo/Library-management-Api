@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Validator;
 class BookController extends Controller
 
 {
-  
+
     /**
      * Display a listing of the resource.
      *
@@ -17,7 +17,7 @@ class BookController extends Controller
     public function index()
     {
         //
-      
+
         $books=Book::all();
         return response()->json(['books'=>$books], 200);
     }
@@ -27,7 +27,7 @@ class BookController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-  
+
     /**
      * Store a newly created resource in storage.
      *
@@ -43,7 +43,7 @@ class BookController extends Controller
             "category"=>"required|string",
 
         ]);
-     
+
 
         if($validator->fails()){
 
@@ -54,9 +54,9 @@ class BookController extends Controller
 
         if ($book) {
 
-            return response()->json(['message'=>'Book with name already exists']);
+            return response()->json(['message'=>'Book with name already exists'],400);
         }
-       
+
         $newBook=Book::create([
             'name'=>$request->get('name'),
             'stock'=>$request->get('stock'),
@@ -73,11 +73,11 @@ class BookController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {   
+    {
         // get single book
         $book=Book::find($id);
 
-        if ($book) 
+        if ($book)
         {
             return response()->json(['book'=>$book]);
         }
@@ -110,11 +110,11 @@ class BookController extends Controller
             $book->update($request->all());
 
             return response()->json($book, 201);
-            
+
         }
 
         return response()->json(['message'=>'Book Not Found'],404);
-        
+
     }
 
     /**

@@ -42,6 +42,7 @@ class Kernel extends HttpKernel
             'bindings',
         ],
         'isAdmin'=>[
+            'TokenAuthentication'=>\App\Http\Middleware\TokenAuthentication::class,
             'IsAdmin'=>\App\Http\Middleware\IsAdmin::class,
         ]
     ];

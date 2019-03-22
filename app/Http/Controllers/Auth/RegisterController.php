@@ -52,7 +52,7 @@ class RegisterController extends Controller
       public function register(Request $request)
         {
 
-        //custom error messages 
+        //custom error messages
         $messages=[
             "name.regex"=>"Name must contain Minimum five characters, at least one letter and one number",
             "password.regex"=>"Password must contain Minimum eight characters, at least one uppercase letter,one lowercase letter, one number and one special character"
@@ -62,7 +62,7 @@ class RegisterController extends Controller
             'name'=>"required|string
             |regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,15}$/",
             'email'=>"required|email",
-            'password'=>"required|string|min:6|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",
+//            'password'=>"required|string|min:6|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",
         ], $messages);
 
         // if validation fails
@@ -88,5 +88,5 @@ class RegisterController extends Controller
 
         return response()->json(compact('newUser','token'),201);
     }
- 
+
 }
