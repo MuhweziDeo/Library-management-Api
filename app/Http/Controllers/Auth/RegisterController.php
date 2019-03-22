@@ -55,11 +55,12 @@ class RegisterController extends Controller
         //custom error messages 
         $messages=[
             "name.regex"=>"Name must contain Minimum five characters, at least one letter and one number",
-            "password.regex"=>"Password must contain Minimum eight characters, at least one uppercase letter, one lowercase letter, one number and one special character"
+            "password.regex"=>"Password must contain Minimum eight characters, at least one uppercase letter,one lowercase letter, one number and one special character"
         ];
         // validate input
         $validator= Validator::make($request->all(),[
-            'name'=>"required|string|unique:users|regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,15}$/",
+            'name'=>"required|string
+            |regex:/^(?=.*[A-Za-z])(?=.*\d)[A-Za-z\d]{5,15}$/",
             'email'=>"required|email",
             'password'=>"required|string|min:6|confirmed|regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/",
         ], $messages);

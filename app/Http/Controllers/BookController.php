@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Validator;
 class BookController extends Controller
 
 {
+  
     /**
      * Display a listing of the resource.
      *
@@ -16,6 +17,7 @@ class BookController extends Controller
     public function index()
     {
         //
+      
         $books=Book::all();
         return response()->json(['books'=>$books], 200);
     }
@@ -38,9 +40,10 @@ class BookController extends Controller
         $validator=Validator::make($request->all(),[
             "name"=>"required|string",
             "stock"=>"required|numeric",
-            "category"=>"required|string"
+            "category"=>"required|string",
 
         ]);
+     
 
         if($validator->fails()){
 
@@ -53,11 +56,11 @@ class BookController extends Controller
 
             return response()->json(['message'=>'Book with name already exists']);
         }
-
+       
         $newBook=Book::create([
             'name'=>$request->get('name'),
             'stock'=>$request->get('stock'),
-            'category'=>$request->get('category')
+            'category'=>$request->get('category'),
         ]);
 
         return response()->json(['book'=>$newBook],201);
